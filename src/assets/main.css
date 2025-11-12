@@ -1,0 +1,9 @@
+/* src/assets/main.css */
+
+/* 1. Impor font di baris paling atas */
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
+/* 2. Terapkan font itu ke seluruh website */
+body {
+  font-family: 'Rethink Sans', sans-serif;
+}
