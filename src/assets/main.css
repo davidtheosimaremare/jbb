@@ -7,3 +7,12 @@
 body {
   font-family: 'Rethink Sans', sans-serif;
 }
+#nprogress .bar {
+  background: #ff0000 !important; /* Ganti kode warna sesuai keinginan */
+  height: 3px !important; /* Mengatur ketebalan bar */
+}
+
+/* Mengubah warna efek bayangan (glow) di ujung bar */
+#nprogress .peg {
+  box-shadow: 0 0 10px #ff0000, 0 0 5px #ff0000 !important;
+}

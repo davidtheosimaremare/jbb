@@ -1,18 +1,19 @@
-<script>
-
-
+<script setup>
+import NumberCounter from '../components/NumberCounter.vue'
 </script>
 
 <template>
 
     <div class="jumbotron bg-herosection">
         <div class="container">
-            <h1 class="display-4 text-herosection">At Glance</h1>
+            <h1 class="display-4 text-herosection">Title</h1>
             <p class="lead desc-herosection">This is a simple hero unit, a simple jumbotron</p>
             <div class="row">
                 <div class="col">
                     <div class="title-row">
-                        <div class="mt-5" style="font-size:48px;font-weight: 300;">1000+</div>
+                        <div class="mt-5" style="font-size:48px;font-weight: 300;">
+                            <NumberCounter :target="520" />+
+                        </div>
                         <div class="desc-row">Jumlah titik BBM Satu Harga di seluruh wilayah Indonesia</div>
                         <div class="border-bottom"></div>
                     </div>
@@ -20,7 +21,9 @@
 
                 <div class="col">
                     <div class="title-row">
-                        <div class="mt-5" style="font-size:48px;font-weight: 300;">1000+</div>
+                        <div class="mt-5" style="font-size:48px;font-weight: 300;">
+                            <NumberCounter :target="720" />+
+                        </div>
                         <div class="desc-row">Jumlah titik BBM Satu Harga di seluruh wilayah Indonesia</div>
                         <div class="border-bottom"></div>
                     </div>
@@ -28,7 +31,9 @@
 
                 <div class="col">
                     <div class="title-row">
-                        <div class="mt-5" style="font-size:48px;font-weight: 300;">1000+</div>
+                        <div class="mt-5" style="font-size:48px;font-weight: 300;">
+                            <NumberCounter :target="1000" />+
+                        </div>
                         <div class="desc-row">Jumlah titik BBM Satu Harga di seluruh wilayah Indonesia</div>
                         <div class="border-bottom"></div>
                     </div>
