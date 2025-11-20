@@ -9,7 +9,10 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation'; // CSS untuk panah
 import AppButton from './AppButton.vue';
-
+import Slider1 from '../assets/images/banner-slider-1.jpg';
+import Slider2 from '../assets/images/banner-slider-2.jpg';
+import Slider3 from '../assets/images/banner-slider-3.jpg';
+import Slider4 from '../assets/images/banner-slider-4.jpg';
 
 // --- STATE ---
 
@@ -17,34 +20,34 @@ import AppButton from './AppButton.vue';
 const slides = ref([
   {
     id: 1,
-    mainImage: './src/assets/images/banner-slider-1.jpg',
+    mainImage: Slider1,
     mainTitle: 'Kekuatan EPC Power Terintegrasi',
     navTitle: 'IDENTITAS',
-    popupImage: './src/assets/images/banner-slider-1.jpg', // Ganti gambar ini
+    popupImage: Slider1, // Ganti gambar ini
     slideDesc: 'Kami menyatukan rekayasa, pengadaan, dan konstruksi. JBB mengelola proyek kelistrikan paling kompleks secara terintegrasi—dari konsep hingga menyala.'
   },
   {
     id: 2,
-    mainImage: './src/assets/images/banner-slider-2.jpg',
+    mainImage: Slider2,
     mainTitle: 'Presisi Tanpa Kompromi',
     navTitle: 'STANDAR',
-    popupImage: './src/assets/images/banner-slider-2.jpg',
+    popupImage: Slider2,
     slideDesc: 'Kualitas adalah standar kami. Kami menerapkan Presisi mutlak dalam desain dan instalasi untuk menjamin sistem yang andal, aman, dan berfungsi sempurna.'
   },
   {
     id: 3,
-    mainImage: './src/assets/images/banner-slider-3.jpg',
+    mainImage: Slider3,
     mainTitle: 'Akselerasi Pasti, Eksekusi Terjamin',
     navTitle: 'KOMITMEN',
-    popupImage: './src/assets/images/banner-slider-3.jpg', // Ganti gambar ini
+    popupImage: Slider3, // Ganti gambar ini
     slideDesc: 'Kami bekerja dengan Kecepatan dan metodologi teruji. JBB adalah Garansi Anda untuk proyek yang selesai tepat waktu, sesuai anggaran, dan melampaui ekspektasi.'
   },
   {
     id: 4,
-    mainImage: './src/assets/images/banner-slider-4.jpg',
+    mainImage: Slider4,
     mainTitle: 'Mitra Andal untuk Energi Berkelanjutan',
     navTitle: 'VISI',
-    popupImage: './src/assets/images/banner-slider-4.jpg', // Ganti gambar ini
+    popupImage: Slider4, // Ganti gambar ini
     slideDesc: 'Kami membangun untuk jangka panjang. JBB mengintegrasikan solusi Berkelanjutan yang efisien, memastikan aset kelistrikan Anda siap untuk tantangan energi masa depan.'
   },
 ]);

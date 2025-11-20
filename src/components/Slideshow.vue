@@ -5,6 +5,11 @@ import { RouterLink } from 'vue-router'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'
 
+import Slider1 from '../assets/images/banner-slider-1.jpg';
+import Slider2 from '../assets/images/banner-slider-2.jpg';
+import Slider3 from '../assets/images/banner-slider-3.jpg';
+import Slider4 from '../assets/images/banner-slider-4.jpg';
+
 // 2. Import Style Swiper
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -17,21 +22,21 @@ const slides = ref([
         id: 1,
         title: 'Title',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-        image: './src/assets/images/banner-slider-1.jpg',
+        image: Slider2,
         link: '/about'
     },
     {
         id: 2,
         title: 'Title',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-        image: './src/assets/images/banner-slider-2.jpg',
+        image: Slider3,
         link: '/about'
     },
     {
         id: 3,
         title: 'Title',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-        image: './src/assets/images/banner-slider-3.jpg',
+        image: Slider4,
         link: '/about'
     }
 ])

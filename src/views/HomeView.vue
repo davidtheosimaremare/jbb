@@ -7,30 +7,35 @@ import Slideshow from '@/components/Slideshow.vue'
 import NewsRecently from '@/components/NewsRecently.vue'
 import ServiceCard from '@/components/ServiceCard.vue'
 
+import Slider1 from '../assets/images/banner-slider-1.jpg';
+import Slider2 from '../assets/images/banner-slider-2.jpg';
+import Slider3 from '../assets/images/banner-slider-3.jpg';
+import Slider4 from '../assets/images/banner-slider-4.jpg';
+
 const CardHomeItems = ref([
   {
     title: 'Layanan 1',
     text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    img: './src/assets/images/banner-slider-1.jpg',
+    img: Slider1,
     hover: '#D9202E'
   },
   {
     title: 'Layanan 2',
     text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    img: '../src/assets/images/slider/banner-1.jpg',
+    img: Slider2,
     hover: '#262F50'
   },
   {
     title: 'Layanan 3',
     text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    img: '../src/assets/images/slider/banner-1.jpg',
+    img: Slider3,
     hover: '#D9202E'
   },
 
   {
     title: 'Layanan 4',
     text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    img: '../src/assets/images/slider/banner-1.jpg',
+    img: Slider4,
     hover: '#262F50'
   }
 ])
