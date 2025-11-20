@@ -111,9 +111,9 @@ onUnmounted(() => {
             </li>
           </ul>
 
-          <a class="navbar-brand" href="#">
+          <RouterLink class="navbar-brand" to="/">
             <img :src="isScrolled ? logoColor : logoLight" width="50px" height="50px" alt="Logo">
-          </a>
+          </RouterLink>
         </div>
       </div>
     </nav>
