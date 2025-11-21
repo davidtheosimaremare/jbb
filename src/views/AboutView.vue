@@ -1,16 +1,29 @@
 <script setup>
 import { ref } from 'vue'
-// Pastikan path ini sesuai dengan lokasi komponen HeroPage kamu
 import HeroPage from '@/components/HeroPage.vue';
+
+// --- IMPORT SWIPER & MODULES ---
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination, Autoplay } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+// --- KONFIGURASI SWIPER ---
+const modules = [Pagination, Autoplay];
 
 // --- 1. ASSETS & DATA HERO ---
 const bannerImage = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop'
 
 // --- 2. DATA GALLERY ---
 const galleryImages = ref([
-  'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1000&auto=format&fit=crop', // Foto Site
-  'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1000&auto=format&fit=crop', // Foto Panel
-  'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1000&auto=format&fit=crop'  // Foto Team
+  'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1000&auto=format&fit=crop', // Site
+  'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1000&auto=format&fit=crop', // Panel
+  'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1000&auto=format&fit=crop', // Team
+  'https://images.unsplash.com/photo-1498084393753-b411b2d26b34?q=80&w=1000&auto=format&fit=crop', // Trafo
+  'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1000&auto=format&fit=crop', // Genset
+  'https://images.unsplash.com/photo-1531297461136-82lw9z1p?q=80&w=1000&auto=format&fit=crop'      // Extra
 ])
 
 // --- 3. DATA MISI ---
@@ -22,13 +35,48 @@ const misiList = ref([
   "Menjadi mitra strategis terpercaya bagi sektor industri dan pemerintah dalam pembangunan ketenagalistrikan."
 ])
 
-// --- 4. DATA LOKASI PROYEK (MAP) ---
-const activeLocationId = ref(2) // Default aktif ID 2 (Jawa Barat)
+// --- 4. DATA KEPEMIMPINAN (NEW) ---
+const leadershipTeam = ref([
+  {
+    name: 'Sudung Situmorang',
+    title: 'Komisaris Utama',
+    image: 'https://images.unsplash.com/photo-1507003211169-e69fe25477eb?q=80&w=1000&auto=format&fit=crop&h=300&w=300' // Contoh Pria 1
+  },
+  {
+    name: 'Ahmad Erani Yustika',
+    title: 'Komisaris',
+    image: 'https://images.unsplash.com/photo-1547425260-76bc4ea63090?q=80&w=1000&auto=format&fit=crop&h=300&w=300' // Contoh Pria 2
+  },
+  {
+    name: 'Panel Barus',
+    title: 'Komisaris',
+    image: 'https://images.unsplash.com/photo-1600486214812-a16f6b15e4f4?q=80&w=1000&auto=format&fit=crop&h=300&w=300' // Contoh Pria 3
+  },
+  {
+    name: 'Rini Widyastuti',
+    title: 'Komisaris',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29329?q=80&w=1000&auto=format&fit=crop&h=300&w=300' // Contoh Wanita 1
+  },
+  {
+    name: 'Budi Santoso',
+    title: 'Direktur Utama',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&h=300&w=300' // Contoh Pria 4
+  },
+  {
+    name: 'Citra Dewi',
+    title: 'Direktur Operasional',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1000&auto=format&fit=crop&h=300&w=300' // Contoh Wanita 2
+  }
+])
+
+
+// --- 5. DATA LOKASI PROYEK (MAP) ---
+const activeLocationId = ref(2)
 const projectLocations = ref([
   {
     id: 1,
     area: 'Sumatera',
-    top: '60%', left: '25%', // Sesuaikan koordinat ini dengan gambar peta nanti
+    top: '60%', left: '25%',
     client: 'PT Bukit Asam',
     project: 'Instalasi Genset & Panel Sinkronisasi 2x500kVA',
     image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1000&auto=format&fit=crop'
@@ -72,20 +120,35 @@ const setActiveLocation = (id) => {
   activeLocationId.value = id
 }
 
-// Logic Lightbox
+// --- LOGIC LIGHTBOX ---
 const isLightboxOpen = ref(false)
-const activeImage = ref('')
+const activeIndex = ref(0)
 
-const openLightbox = (imgSrc) => {
-  activeImage.value = imgSrc
+const openLightbox = (index) => {
+  activeIndex.value = index
   isLightboxOpen.value = true
   document.body.style.overflow = 'hidden'
 }
 
 const closeLightbox = () => {
   isLightboxOpen.value = false
-  activeImage.value = ''
   document.body.style.overflow = 'auto'
+}
+
+const nextImage = () => {
+  if (activeIndex.value < galleryImages.value.length - 1) {
+    activeIndex.value++
+  } else {
+    activeIndex.value = 0
+  }
+}
+
+const prevImage = () => {
+  if (activeIndex.value > 0) {
+    activeIndex.value--
+  } else {
+    activeIndex.value = galleryImages.value.length - 1
+  }
 }
 </script>
 
@@ -118,17 +181,36 @@ const closeLightbox = () => {
           </div>
         </div>
 
-        <div class="row g-4 mb-5">
-          <div v-for="(img, index) in galleryImages" :key="index" class="col-md-4">
-            <div class="gallery-item" @click="openLightbox(img)">
-              <img :src="img" alt="JBB Activity" class="img-fluid rounded-4 shadow-sm">
-              <div class="overlay">
-                <i class="bi bi-zoom-in"></i>
-              </div>
-            </div>
+        <div class="row mb-5">
+          <div class="col-12">
+            <swiper :slidesPerView="1" :spaceBetween="20" :loop="true" :autoplay="{
+              delay: 3000,
+              disableOnInteraction: false,
+            }" :pagination="{ clickable: true }" :breakpoints="{
+                '640': {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                '768': {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                '1024': {
+                  slidesPerView: 4,
+                  spaceBetween: 30,
+                },
+              }" :modules="modules" class="jbb-gallery-swiper">
+              <swiper-slide v-for="(img, index) in galleryImages" :key="index">
+                <div class="gallery-item" @click="openLightbox(index)">
+                  <img :src="img" alt="JBB Activity" class="img-fluid shadow-sm">
+                  <div class="overlay">
+                    <i class="bi bi-zoom-in"></i>
+                  </div>
+                </div>
+              </swiper-slide>
+            </swiper>
           </div>
         </div>
-
         <div class="row justify-content-center mb-5">
           <div class="col-lg-10 text-center">
             <h3 class="section-subtitle mb-3">Semangat Membangun Negeri</h3>
@@ -180,9 +262,28 @@ const closeLightbox = () => {
         </div>
       </section>
 
+      <section class="leadership-section py-5 bg-light">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="section-title">Kepemimpinan Perusahaan</h2>
+            <p class="text-muted">Tim profesional yang memimpin JBB menuju inovasi dan keunggulan</p>
+          </div>
+
+          <div class="row g-4 justify-content-center">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12" v-for="(person, index) in leadershipTeam" :key="index">
+              <div class="leader-card text-center h-100">
+                <div class="leader-image-wrapper mx-auto mb-3">
+                  <img :src="person.image" :alt="person.name" class="img-fluid rounded-circle">
+                </div>
+                <h5 class="leader-name">{{ person.name }}</h5>
+                <p class="leader-title text-muted">{{ person.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="project-map-section py-5">
         <div class="container">
-
           <div class="text-center mb-5">
             <h2 class="section-title">Jangkauan Proyek Kami</h2>
             <p class="text-muted">Melayani kebutuhan energi dan konstruksi listrik di seluruh pelosok Nusantara</p>
@@ -220,10 +321,19 @@ const closeLightbox = () => {
       </section>
 
       <div v-if="isLightboxOpen" class="lightbox-overlay" @click="closeLightbox">
-        <button class="close-btn" @click="closeLightbox">&times;</button>
-        <img :src="activeImage" class="lightbox-img" @click.stop>
-      </div>
 
+        <button class="nav-btn prev-btn" @click.stop="prevImage">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <img :src="galleryImages[activeIndex]" class="lightbox-img" @click.stop>
+
+        <button class="nav-btn next-btn" @click.stop="nextImage">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+
+        <button class="close-btn" @click="closeLightbox">&times;</button>
+      </div>
     </div>
   </div>
 </template>
@@ -237,7 +347,8 @@ const closeLightbox = () => {
 
 .section-title {
   color: #002b49;
-  font-weight: 800;
+  font-weight: 600;
+  margin-top: 5px;
 }
 
 .section-subtitle {
@@ -261,13 +372,28 @@ const closeLightbox = () => {
   font-weight: 600;
 }
 
-/* --- GALLERY STYLES --- */
+/* --- SWIPER GALLERY STYLES --- */
+.jbb-gallery-swiper {
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  height: 250px;
+}
+
 .gallery-item {
   position: relative;
-  cursor: pointer;
+  cursor: grab;
   overflow: hidden;
   border-radius: 1rem;
-  height: 250px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item:active {
+  cursor: grabbing;
 }
 
 .gallery-item img {
@@ -368,7 +494,7 @@ const closeLightbox = () => {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #00529c, #002b49);
+  background: linear-gradient(135deg, #d32f2f, #7f0000);
   color: #fff;
   border-radius: 8px;
   display: flex;
@@ -386,6 +512,71 @@ const closeLightbox = () => {
   line-height: 1.6;
   padding-top: 5px;
 }
+
+/* --- LEADERSHIP SECTION (NEW) --- */
+.leadership-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: #f0f2f5;
+  /* Warna latar belakang abu-abu muda */
+}
+
+.leader-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.leader-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.leader-image-wrapper {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  /* Warna latar belakang untuk gambar profil */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.leader-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  /* Sedikit efek grayscale */
+  transition: filter 0.3s ease;
+}
+
+.leader-card:hover .leader-image-wrapper img {
+  filter: grayscale(0%);
+  /* Warna asli saat hover */
+}
+
+.leader-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--jbb-blue);
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.leader-title {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
 
 /* --- MAP SECTION STYLES --- */
 .project-map-section {
@@ -564,7 +755,7 @@ const closeLightbox = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.92);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -573,9 +764,9 @@ const closeLightbox = () => {
 }
 
 .lightbox-img {
-  max-width: 90%;
-  max-height: 90vh;
-  border-radius: 10px;
+  max-width: 80%;
+  max-height: 85vh;
+  border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -588,6 +779,44 @@ const closeLightbox = () => {
   color: #fff;
   font-size: 3rem;
   cursor: pointer;
+  z-index: 10001;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10001;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
 }
 
 @keyframes fadeIn {
@@ -627,6 +856,29 @@ const closeLightbox = () => {
     width: 250%;
     max-width: none;
     transform: translateX(-30%);
+  }
+
+  .swiper-slide {
+    height: 300px;
+  }
+
+  /* Mobile Lightbox Adjustments */
+  .lightbox-img {
+    max-width: 100%;
+  }
+
+  .prev-btn {
+    left: 5px;
+  }
+
+  .next-btn {
+    right: 5px;
+  }
+
+  /* Mobile Leadership Adjustments */
+  .leader-image-wrapper {
+    width: 120px;
+    height: 120px;
   }
 }
 </style>

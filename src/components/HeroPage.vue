@@ -79,7 +79,7 @@ defineProps({
     color: #fff;
     font-weight: 500;
     /* Bold tebal */
-    font-size: 3.5rem;
+    font-size: 42px;
     /* Ukuran besar */
     text-transform: capitalize;
     letter-spacing: 1px;
